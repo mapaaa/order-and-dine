@@ -21,10 +21,6 @@ class CustomUserManager(BaseUserManager):
         return user
 
     def create_superuser(self, first_name, last_name, email, password):
-        print('First_name = ' + first_name)
-        print('Last_name = ' + last_name)
-        print('Email = ' + email)
-        print('Password = ' + password)
         user=self.create_user(
             first_name = first_name,
             last_name = last_name,
@@ -45,6 +41,7 @@ class CustomUser(AbstractUser):
         max_length = 1000,
         unique = True,
     )
+    username = models.CharField(max_length=40, unique=False, default='')
     preferences = models.ManyToManyField('FoodTag')
     is_admin = models.BooleanField(default=False)
 
