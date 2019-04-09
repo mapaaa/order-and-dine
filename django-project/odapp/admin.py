@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth.models import Group
 
-from odapp.models import CustomUser
+from odapp.models import CustomUser, FoodTag
 
 
 class UserCreationForm(forms.ModelForm):
@@ -63,5 +63,6 @@ class UserAdmin(BaseUserAdmin):
     filter_horizontal = ()
 
 admin.site.register(CustomUser, UserAdmin)
+admin.site.register(FoodTag)
 admin.site.unregister(Group)
 
