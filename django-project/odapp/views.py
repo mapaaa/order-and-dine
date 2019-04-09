@@ -16,3 +16,7 @@ def signup(request):
     else:
         form = UserCreationForm()
     return render(request, 'odapp/signup.html', {'form': form})
+
+
+def index(request):
+    return render(request, 'odapp/index.html')
