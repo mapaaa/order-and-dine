@@ -8,8 +8,31 @@ from odapp.models import CustomUser, FoodTag
 
 
 class UserCreationForm(forms.ModelForm):
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+    password1 = forms.CharField(label='Password', widget=forms.PasswordInput(
+        attrs={
+            'class': 'input',
+        }
+    ))
+    password2 = forms.CharField(label='Confirm password', widget=forms.PasswordInput(
+        attrs={
+            'class': 'input',
+        }
+    ))
+    first_name = forms.CharField(label='First Name', widget=forms.TextInput(
+        attrs={
+            'class': 'input',
+        }
+    ))
+    last_name = forms.CharField(label='Last Name', widget=forms.TextInput(
+        attrs={
+            'class': 'input',
+        }
+    ))
+    email = forms.CharField(label='Email', widget=forms.EmailInput(
+        attrs={
+            'class': 'input',
+        }
+    ))
 
     class Meta:
         model = CustomUser
@@ -61,6 +84,7 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ()
+
 
 admin.site.register(CustomUser, UserAdmin)
 admin.site.register(FoodTag)
