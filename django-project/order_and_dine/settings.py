@@ -41,6 +41,9 @@ INSTALLED_APPS = [
 
 # Auth
 AUTH_USER_MODEL = 'odapp.CustomUser'
+AUTHENTICATION_BACKENDS = (
+        'odapp.settings.AuthenticationBackend',
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
