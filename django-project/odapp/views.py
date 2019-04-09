@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect, render
-from odapp.forms import UserCreationForm
+from odapp.admin import UserCreationForm
 
 
 def signup(request):
