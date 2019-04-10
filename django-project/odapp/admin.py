@@ -33,6 +33,11 @@ class UserCreationForm(forms.ModelForm):
             'class': 'input',
         }
     ))
+    preferences = forms.ModelMultipleChoiceField(queryset=FoodTag.objects.all(), widget=forms.CheckboxSelectMultiple(
+        attrs={
+            'class': '',
+        }
+    ))
 
     class Meta:
         model = CustomUser
@@ -50,6 +55,7 @@ class UserCreationForm(forms.ModelForm):
         user.set_password(self.cleaned_data["password1"])
         if commit:
             user.save()
+        user.preferences.add(*self.cleaned_data['preferences'])
         return user
 
 

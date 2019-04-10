@@ -1,6 +1,8 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm 
 from django.shortcuts import redirect, render
 from odapp.admin import UserCreationForm
+from odapp.settings import AuthenticationBackend
 
 
 def signup(request):
@@ -16,4 +18,14 @@ def signup(request):
 
 
 def index(request):
-    return render(request, 'odapp/index.html')
+    if request.method == 'POST':
+        email = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=email, password=password)
+        if user is not None:
+            login(request, user, backend='odapp.settings.AuthenticationBackend')
+            return redirect('/')
+        return redirect('/')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'odapp/index.html', {'form': form})

@@ -42,7 +42,7 @@ INSTALLED_APPS = [
 # Auth
 AUTH_USER_MODEL = 'odapp.CustomUser'
 AUTHENTICATION_BACKENDS = (
-        'odapp.settings.AuthenticationBackend',
+    'odapp.settings.AuthenticationBackend',
 )
 
 MIDDLEWARE = [
