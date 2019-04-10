@@ -2,11 +2,13 @@ body {
   margin: 0;
 }
 
+ul {
+  list-style-type: none;
+}
+
 .all-container {
-  max-width: 100%;
-  width: 900px;
-  margin: 0 auto;
-  padding-top: 300px;
+  margin-top: 100px;
+  padding-right: 50px;
 }
 
 .header {
@@ -306,12 +308,17 @@ body {
   border: 1px solid white;
   font-size: 14px;
   color: #000;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 25px auto;
+  width: 300px;
+}
+
+.signup {
+  margin-top: 120px;
 }
 
 .card {
   background: #ff9615;
-  margin-top: 120px;
   border-radius: 5px;
   color: #fff;
   padding: 5%;
@@ -319,4 +326,8 @@ body {
 
 .bold-font {
   font-weight: bold;
+}
+
+.row {
+  max-width: 100%;
 }
