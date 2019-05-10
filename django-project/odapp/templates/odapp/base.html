@@ -1,41 +1,50 @@
 {% load static %}
-<html>
-    <head>
-        <title>Order and Dine</title>
-        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    </head>
-    <body>
-        <div class="header">
-          <div class="logo">
-            Order &amp; Dine
-          </div>
-          <div class="vertical-bar"></div>
-          <div class="header-right">
-            <div class="simple-nav">
-              Delivery
-            </div>
-            <div class="simple-nav">
-              Reservation
-            </div>
-            <div class="simple-nav">
-              Contact
-            </div>
-            <div class="simple-nav">
-              About
-            </div>
-            <div class='search-bar-container'>
-              <div>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Order and Dine</title>
+
+    <!-- Bootstrap -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <script src="{% static 'jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+  </head>
+  <body>
+   <!-- Navigation -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand text-lowercase" href="index.html">Order and Dine</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" 
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link text-white" href="reservation.html">Make a reservation</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="contact.html">Contact</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Drop Down thing
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="">List 1</a>
+                <a class="dropdown-item" href="">List 2</a>
               </div>
-              <input class='search-bar' placeholder="🔍 Search food here..."/>
-            </div>
-          </div>
+            </li>
+         </ul>
         </div>
-        <div class="content">
-            <div class="row">
-              {% block content %}
-              {% endblock %}
-            </div>
-        </div>
-    </body>
+      </div>
+    </nav>
+  </body>
 </html>
