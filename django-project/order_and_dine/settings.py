@@ -128,3 +128,12 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'odapp/media')
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# Email
+EMAIL_HOST = 'smtp.mail.yahoo.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'orderanddine@yahoo.com'
+EMAIL_HOST_PASSWORD = 'parola1234'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
