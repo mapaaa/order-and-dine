@@ -1,0 +1,13 @@
+{% extends 'odapp/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+ <form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <p> Don't have an account? Sign up <a href="/signup"> here </a><p>
+    <button type="submit" class="btn btn-success">Login</button>
+ </from>
+{% endblock %}
+

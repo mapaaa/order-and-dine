@@ -18,6 +18,10 @@ def signup(request):
 
 
 def index(request):
+    return render(request, 'odapp/index.html')
+
+
+def login_view(request):
     if request.method == 'POST':
         email = request.POST['username']
         password = request.POST['password']
@@ -28,4 +32,4 @@ def index(request):
         return redirect('/')
     else:
         form = AuthenticationForm()
-    return render(request, 'odapp/index.html', {'form': form})
+    return render(request, 'odapp/login.html', {'form' : form})

@@ -1,12 +1,14 @@
 {% extends 'odapp/base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
   <div class="card container signup">
   <h2 class="bold-font text-center">Join us!</h2>
   <form method="post" class="text-center">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="button" style="margin: 0 auto;">Sign up</button>
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-success">Sign up</button>
   </form>
   </div>
 {% endblock %}
