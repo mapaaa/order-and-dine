@@ -59,7 +59,7 @@ def contact(request):
             message = form.cleaned_data['message']
             try:
                 send_mail('ORDER_AND_DINE', from_email + ' ' + full_name + '\n' + message, settings.EMAIL_HOST_USER, ['maria.pandele33@gmail.com'], False)
-                send_mail('Order and Dine Services', 'Thank you for contancting Order and Dine!\n\nWe will respond to your inquiry as soon as possible within the next two business days. \nBe sure to add orderanddine@yahoo.com to your address book or safe sender list to ensure that you receive our e-mails.\n\nBon Appétit,\nOrder and Dine Team', settings.EMAIL_HOST_USER, [from_email])
+                send_mail('Order and Dine Services', 'Thank you for contacting Order and Dine!\n\nWe will respond to your inquiry as soon as possible within the next two business days. \nBe sure to add orderanddine@yahoo.com to your address book or safe sender list to ensure that you receive our e-mails.\n\nBon Appetit,\nOrder and Dine Team', settings.EMAIL_HOST_USER, [from_email])
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect('success')
