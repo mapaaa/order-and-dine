@@ -32,7 +32,17 @@
     </div>
   </header>
   <div class="container">
-    <h1 class="my-4 txt-theme-color">What do you feel like eating today?</h1>
+    {% if loggedout == 'True' %}
+    <div class="alert alert-success lower" role="alert">
+      <p>You've been logged out successfully!</p>
+    </div>
+    {% endif %}
+    {% if not user.is_authenticated %}
+      <h1 class="my-4 txt-theme-color">What do you feel like eating today?</h1>
+    {% endif %}
+    {% if user.is_authenticated %}
+    <h1 class="my-4 txt-theme-color">What do you feel like eating today, <span>{{ user.first_name }}</span>?</h1>
+    {% endif %}
     <div class="row">
       {% for restaurant in restaurants %}
         <div class="col-lg-4 col-sm-6 portfolio-item">

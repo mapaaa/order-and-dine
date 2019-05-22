@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm 
 from django.shortcuts import redirect, render
 from odapp.admin import UserCreationForm
@@ -22,9 +22,15 @@ def signup(request):
     return render(request, 'odapp/signup.html', {'form': form})
 
 
-def index(request):
+def index2(request, loggedout):
     restaurants = Restaurant.objects.all()
-    return render(request, 'odapp/index.html', {'restaurants' : restaurants})
+    return render(request, 'odapp/index.html', {'restaurants' : restaurants, 'loggedout': loggedout})
+
+
+def index(request):
+    loggedout = 'False'
+    restaurants = Restaurant.objects.all()
+    return render(request, 'odapp/index.html', {'restaurants' : restaurants, 'loggedout': loggedout})
 
 
 def login_view(request):
@@ -46,13 +52,12 @@ def about(request):
 
 
 def contact(request):
+    print('contac')
     if request.method == 'GET':
         form = ContactForm()
     else:
         form = ContactForm(request.POST)
-        print(form.is_valid)
         if form.is_valid():
-            print('isva;i')
             full_name = form.cleaned_data['full_name']  
             from_email = form.cleaned_data['from_email']
             message = form.cleaned_data['message']
@@ -67,3 +72,8 @@ def contact(request):
 
 def success(request):
     return render(request, 'odapp/success.html')
+
+
+def logout_view(request):
+    logout(request)         
+    return redirect('index2',  loggedout='True')
