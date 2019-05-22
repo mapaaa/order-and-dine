@@ -41,7 +41,7 @@
       <h1 class="my-4 txt-theme-color">What do you feel like eating today?</h1>
     {% endif %}
     {% if user.is_authenticated %}
-    <h1 class="my-4 txt-theme-color">What do you feel like eating today, <span>{{ user.first_name }}</span>?</h1>
+      <h1 class="my-4 txt-theme-color">What do you feel like eating today, <span>{{ user.first_name }}</span>?</h1>
     {% endif %}
     <div class="row">
       {% for restaurant in restaurants %}
@@ -50,7 +50,7 @@
             <a href="#"><img class="card-img-top" src="{{ restaurant.image.url }}" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="#">{{ restaurant.name }}</a>
+                <a class="txt-theme-color font-weight-bold" href="#">{{ restaurant.name }}</a>
               </h4>
             </div>
           </div>

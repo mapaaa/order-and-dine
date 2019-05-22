@@ -22,7 +22,13 @@ body {
 }
 
 .txt-theme-color {
-  color: #eea460;
+  color: #eea460!important;
+}
+
+.btn-theme {
+  background-color: #eea460;
+  border-color: #eea460;
+  color: white;
 }
 
 .lower {
