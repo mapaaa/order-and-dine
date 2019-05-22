@@ -24,7 +24,6 @@ def signup(request):
 
 def index(request):
     restaurants = Restaurant.objects.all()
-    print(len(restaurants))
     return render(request, 'odapp/index.html', {'restaurants' : restaurants})
 
 
