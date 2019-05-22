@@ -64,3 +64,13 @@ class FoodTag(models.Model):
     def __str__(self):
         return self.name
 
+
+class Restaurant(models.Model):
+    name = models.CharField(max_length=100)
+    lon = models.FloatField()
+    lat = models.FloatField()
+    price = models.CharField(max_length=5)
+    image = models.ImageField(upload_to='restaurants_images', blank=True)
+    
+    def __str__(self):
+        return self.name + ', ' + self.price

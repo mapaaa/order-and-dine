@@ -3,6 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import redirect, render
 from odapp.admin import UserCreationForm
 from odapp.settings import AuthenticationBackend
+from .models import Restaurant
 
 
 def signup(request):
@@ -18,7 +19,9 @@ def signup(request):
 
 
 def index(request):
-    return render(request, 'odapp/index.html')
+    restaurants = Restaurant.objects.all()
+    print(len(restaurants))
+    return render(request, 'odapp/index.html', {'restaurants' : restaurants})
 
 
 def login_view(request):

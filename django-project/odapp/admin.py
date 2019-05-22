@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth.models import Group
 
-from odapp.models import CustomUser, FoodTag
+from odapp.models import CustomUser, FoodTag, Restaurant
 
 
 class UserCreationForm(forms.ModelForm):
@@ -94,5 +94,6 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.register(CustomUser, UserAdmin)
 admin.site.register(FoodTag)
+admin.site.register(Restaurant)
 admin.site.unregister(Group)
 
