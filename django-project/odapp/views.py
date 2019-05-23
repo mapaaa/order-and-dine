@@ -1,12 +1,12 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm 
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from odapp.admin import UserCreationForm
 from odapp.settings import AuthenticationBackend
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Restaurant
-from .forms import ContactForm
+from .forms import ContactForm, ReservationForm
 from django.conf import settings
 
 
@@ -22,15 +22,20 @@ def signup(request):
     return render(request, 'odapp/signup.html', {'form': form})
 
 
-def index2(request, loggedout):
+def index2(request, action):
     restaurants = Restaurant.objects.all()
-    return render(request, 'odapp/index.html', {'restaurants' : restaurants, 'loggedout': loggedout})
+    return render(request, 'odapp/index.html', {'restaurants' : restaurants, 'action': action})
 
 
 def index(request):
-    loggedout = 'False'
+    action = 'False'
     restaurants = Restaurant.objects.all()
-    return render(request, 'odapp/index.html', {'restaurants' : restaurants, 'loggedout': loggedout})
+    return render(request, 'odapp/index.html', {'restaurants' : restaurants, 'action': action})
+
+
+def restaurant(request, pk):
+    restaurant = get_object_or_404(Restaurant, pk=pk)
+    return render(request, 'odapp/restaurant.html', {'restaurant' : restaurant})
 
 
 def login_view(request):
@@ -52,18 +57,17 @@ def about(request):
 
 
 def contact(request):
-    print('contac')
     if request.method == 'GET':
         form = ContactForm()
     else:
         form = ContactForm(request.POST)
         if form.is_valid():
             full_name = form.cleaned_data['full_name']  
-            from_email = form.cleaned_data['from_email']
+            email = form.cleaned_data['email']
             message = form.cleaned_data['message']
             try:
-                send_mail('ORDER_AND_DINE', from_email + ' ' + full_name + '\n' + message, settings.EMAIL_HOST_USER, ['maria.pandele33@gmail.com'], False)
-                send_mail('Order and Dine Services', 'Thank you for contacting Order and Dine!\n\nWe will respond to your inquiry as soon as possible within the next two business days. \nBe sure to add orderanddine@yahoo.com to your address book or safe sender list to ensure that you receive our e-mails.\n\nBon Appetit,\nOrder and Dine Team', settings.EMAIL_HOST_USER, [from_email])
+                send_mail('ORDER_AND_DINE', email + ' ' + full_name + '\n' + message, settings.EMAIL_HOST_USER, ['cllaire11@gmail.com '], False)
+                send_mail('Order and Dine Services', 'Thank you for contacting Order and Dine!\n\nWe will respond to your inquiry as soon as possible within the next two business days. \nBe sure to add orderanddine@yahoo.com to your address book or safe sender list to ensure that you receive our e-mails.\n\nBon Appetit,\nOrder and Dine Team', settings.EMAIL_HOST_USER, [email])
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect('success')
@@ -76,4 +80,27 @@ def success(request):
 
 def logout_view(request):
     logout(request)         
-    return redirect('index2',  loggedout='True')
+    return redirect('index2',  action='LoggedOut')
+
+
+def reservation(request, pk):
+    restaurant = get_object_or_404(Restaurant, pk=pk)
+    if request.method == 'GET':
+        form = ReservationForm()
+    else:
+        form = ReservationForm(request.POST)
+        if form.is_valid():
+            full_name = form.cleaned_data['full_name']  
+            email = form.cleaned_data['email']
+            date = form.cleaned_data['date']
+            time = form.cleaned_data['time']
+            number_of_people = form.cleaned_data['number_of_people']
+            try:
+                send_mail('Reservation request', full_name + ' ' + email + ' ' + str(date) + ' ' + str(time) + ' ' +  ' ' + str(number_of_people) + restaurant.name, settings.EMAIL_HOST_USER, ['cllaire11@gmail.com' ], False)
+                send_mail('Order and Dine Services', 'Thank you for making a reservation at ' + restaurant.name + '!\n\nWe will confirm your reservation as soon as possible.\nBe sure to add orderanddine@yahoo.com to your address book or safe sender list to ensure that you receive our e-mails.\n\nBon Appetit,\nOrder and Dine Team', settings.EMAIL_HOST_USER, [email], False)
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return redirect('index2', action='ReservationMade')
+    return render(request, 'odapp/reservation.html', {'form' : form, 'restaurant': restaurant})
+
+ 

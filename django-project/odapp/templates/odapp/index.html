@@ -32,9 +32,14 @@
     </div>
   </header>
   <div class="container">
-    {% if loggedout == 'True' %}
+    {% if action == 'LoggedOut' %}
     <div class="alert alert-success lower" role="alert">
       <p>You've been logged out successfully!</p>
+    </div>
+    {% endif %}
+    {% if action == 'ReservationMade' %}
+    <div class="alert alert-success lower" role="alert">
+      <p>We've received your reservation request! Please check your inbox.</p>
     </div>
     {% endif %}
     {% if not user.is_authenticated %}
@@ -50,8 +55,11 @@
             <a href="#"><img class="card-img-top" src="{{ restaurant.image.url }}" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a class="txt-theme-color font-weight-bold" href="#">{{ restaurant.name }}</a>
+                <a class="txt-theme-color font-weight-bold" href="{% url 'restaurant' pk=restaurant.pk %}">{{ restaurant.name }}</a>
               </h4>
+              <div>
+                <a style="color:green;" href="{% url 'reservation' pk=restaurant.pk %}">Make reservation</a>
+              </div>
             </div>
           </div>
         </div>

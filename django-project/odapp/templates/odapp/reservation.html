@@ -1,0 +1,20 @@
+{% extends 'odapp/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="lower container">
+  <h1 class="mt-4 mb-3 txt-theme-color">{{ restaurant.name }}</h1>
+  <p>Please fill out this form in order to make at a reservation.</p>
+  <p class="font-weight-bold text-danger">You can only make a reservation for up to 5 people!</p>
+    <div class="row">
+      <div class="col-lg-8 mb-4">
+        <form method="post">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <button type="submit" class="btn btn-theme" id="sendMessageButton">Make Reservation</button>
+        </form>
+      </div>
+    </div>
+</div>
+{% endblock %}
