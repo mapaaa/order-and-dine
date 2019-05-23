@@ -1,6 +1,18 @@
 {% extends 'odapp/base.html' %}
 
-<div class='lower container'>
-</div>
+{% load crispy_forms_tags %}
+
 {% block content %}
+<div class='lower container'>
+  <h1 class="mt-4 mb-3 txt-theme-color">{{ restaurant.name }}</h1>
+  <div class="row">
+      <div class="col-lg-8 mb-4">
+        <form method="post">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <button type="submit" class="btn btn-theme" id="sendMessageButton">Order!</button>
+        </form>
+      </div>
+    </div>
+</div>
 {% endblock %}

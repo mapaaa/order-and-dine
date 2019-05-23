@@ -1,5 +1,6 @@
 from django import forms
 import datetime
+from odapp.models import Meniu
 
 
 class ContactForm(forms.Form):
@@ -14,3 +15,7 @@ class ReservationForm(forms.Form):
     date = forms.DateField(initial=datetime.date.today)
     time = forms.TimeField()
     number_of_people = forms.IntegerField(min_value=1, max_value=5)
+
+
+class OrderForm(forms.Form):
+    meniu = forms.ModelMultipleChoiceField(queryset=Meniu.objects.all(), widget=forms.CheckboxSelectMultiple(), required=False)

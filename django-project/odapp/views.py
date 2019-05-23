@@ -6,8 +6,9 @@ from odapp.settings import AuthenticationBackend
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Restaurant
-from .forms import ContactForm, ReservationForm
+from .forms import ContactForm, ReservationForm, OrderForm
 from django.conf import settings
+import random
 
 
 def signup(request):
@@ -23,13 +24,19 @@ def signup(request):
 
 
 def index2(request, action):
-    restaurants = Restaurant.objects.all()
+    if request.user.is_authenticated:
+        restaurants = Restaurant.objects.order_by('-name')
+    else:
+        restaurants = Restaurant.objects.all()
     return render(request, 'odapp/index.html', {'restaurants' : restaurants, 'action': action})
 
 
 def index(request):
     action = 'False'
-    restaurants = Restaurant.objects.all()
+    if request.user.is_authenticated:
+        restaurants = Restaurant.objects.order_by('-name')
+    else:
+        restaurants = Restaurant.objects.all()
     return render(request, 'odapp/index.html', {'restaurants' : restaurants, 'action': action})
 
 
@@ -103,4 +110,12 @@ def reservation(request, pk):
             return redirect('index2', action='ReservationMade')
     return render(request, 'odapp/reservation.html', {'form' : form, 'restaurant': restaurant})
 
- 
+
+def restaurant(request, pk):
+    if request.method == 'POST':
+        return redirect('index2', action='OrderPlaced')
+    else:
+        restaurant = get_object_or_404(Restaurant, pk=pk)
+        form = OrderForm()
+        print(form)
+        return render(request, 'odapp/restaurant.html', {'restaurant' : restaurant, 'form': form})

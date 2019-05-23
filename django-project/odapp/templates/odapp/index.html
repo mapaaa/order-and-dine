@@ -42,6 +42,11 @@
       <p>We've received your reservation request! Please check your inbox.</p>
     </div>
     {% endif %}
+    {% if action == 'OrderPlaced' %}
+    <div class="alert alert-success lower" role="alert">
+      <p>We've received your order!</p>
+    </div>
+    {% endif %}
     {% if not user.is_authenticated %}
       <h1 class="my-4 txt-theme-color">What do you feel like eating today?</h1>
     {% endif %}
@@ -57,9 +62,11 @@
               <h4 class="card-title">
                 <a class="txt-theme-color font-weight-bold" href="{% url 'restaurant' pk=restaurant.pk %}">{{ restaurant.name }}</a>
               </h4>
+              {% if user.is_authenticated %}
               <div>
                 <a style="color:green;" href="{% url 'reservation' pk=restaurant.pk %}">Make reservation</a>
               </div>
+              {% endif %}
             </div>
           </div>
         </div>
